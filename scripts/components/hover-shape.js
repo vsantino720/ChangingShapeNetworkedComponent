@@ -11,6 +11,7 @@ AFRAME.registerComponent('hover-shape', {
         //Define the different shapes that we will cycle through
         this.SHAPES = ['box', 'cone', 'dodecahedron', 'octahedron', 'sphere', 'torus', 'tetrahedron'];
         this.onNext = this.onNext.bind(this);
+        //Need to emit the correct event with another object
         this.el.addEventListener('click', this.onNext);
     },
     tick: function () {
