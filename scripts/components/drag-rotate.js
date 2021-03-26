@@ -34,15 +34,15 @@ AFRAME.registerComponent('drag-rotate', {
     if (this.dragCursor) {
       // Compute change in cursor position
       const dx = this.dragCursor.position.x - this.prevPosition.x;
-      const dy = this.dragCursor.position.y - this.prevPosition.y;
+      const dz = this.dragCursor.position.z - this.prevPosition.z;
 
       // Take ownership of the `networked` entity and update the networked radius
       if (NAF.connection.isConnected()) {
         NAF.utils.takeOwnership(this.el)
       }
       //Update the rotation of the object as the horizontal change in the cursor position.
-      this.el.object3D.rotation.y = dx + dy + this.el.object3D.rotation.y;
-
+      var sensitivity = .75;
+      this.el.object3D.rotation.y = (dx + dz) * sensitivity + this.el.object3D.rotation.y;
       // Store cursor position for next frame.
       this.prevPosition.copy(this.dragCursor.position)
     }
